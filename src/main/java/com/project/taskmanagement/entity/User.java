@@ -1,4 +1,4 @@
-package entity;
+package com.project.taskmanagement.entity;
 
 import jakarta.persistence.*;
 
