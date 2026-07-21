@@ -1,6 +1,6 @@
-package com.project.taskmanagement.repository;
+package com.project.taskmanagement.dao;
 
-import com.project.taskmanagement.entity.Ticket;
+import com.project.taskmanagement.modal.Ticket;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

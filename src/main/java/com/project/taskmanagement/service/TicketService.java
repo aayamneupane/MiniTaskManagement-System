@@ -1,8 +1,7 @@
 package com.project.taskmanagement.service;
 
-import com.project.taskmanagement.entity.Ticket;
-import com.project.taskmanagement.repository.TicketRepository;
-import com.project.taskmanagement.repository.UserRepository;
+import com.project.taskmanagement.modal.Ticket;
+import com.project.taskmanagement.dao.TicketRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

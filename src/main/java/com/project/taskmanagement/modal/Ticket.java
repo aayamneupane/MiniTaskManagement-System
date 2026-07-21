@@ -1,4 +1,4 @@
-package com.project.taskmanagement.entity;
+package com.project.taskmanagement.modal;
 
 import jakarta.persistence.*;
 

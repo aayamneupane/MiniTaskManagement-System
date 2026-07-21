@@ -1,7 +1,7 @@
 package com.project.taskmanagement.service;
 
-import com.project.taskmanagement.entity.User;
-import com.project.taskmanagement.repository.UserRepository;
+import com.project.taskmanagement.modal.User;
+import com.project.taskmanagement.dao.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

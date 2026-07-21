@@ -1,6 +1,6 @@
-package com.project.taskmanagement.repository;
+package com.project.taskmanagement.dao;
 
-import com.project.taskmanagement.entity.User;
+import com.project.taskmanagement.modal.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 // creating a user repo that works with User table
