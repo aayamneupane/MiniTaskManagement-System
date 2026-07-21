@@ -30,10 +30,17 @@ public class TicketService {
 
             // to send the email
             if (assignerUser.isPresent()) {
-                emailService.sendTicketAssignedEmail(
-                        assignerUser.get().getEmail(),
-                        savedTicket.getTitle()
-                );
+                try {
+                    emailService.sendTicketAssignedEmail(
+                            assignerUser.get().getEmail(),
+                            savedTicket.getTitle()
+                    );
+
+                }
+                catch (Exception e) {
+                    System.out.println("Email sending failed: " + e.getMessage());
+
+                }
             }
         }
 
