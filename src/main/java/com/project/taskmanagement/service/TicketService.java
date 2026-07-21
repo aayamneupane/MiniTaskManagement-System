@@ -23,6 +23,7 @@ public class TicketService {
         return ticketRepository.findAll();
     }
 
+
     public Optional<Ticket> getTicketById(Long ticketId) {
         return ticketRepository.findById(ticketId);
     }

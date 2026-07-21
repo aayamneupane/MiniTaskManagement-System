@@ -15,6 +15,13 @@ public class UserService {
     }
 
     public User registerUser(User user) {
+        // to avoid duplicate users
+        User existingUser = userRepository.findByEmail(user.getEmail());
+
+        if (existingUser != null) {
+            return null;
+        }
+
         return userRepository.save(user);
     }
 
