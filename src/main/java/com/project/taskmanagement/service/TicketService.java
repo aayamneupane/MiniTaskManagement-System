@@ -1,7 +1,9 @@
 package com.project.taskmanagement.service;
 
+import com.project.taskmanagement.dao.UserRepository;
 import com.project.taskmanagement.modal.Ticket;
 import com.project.taskmanagement.dao.TicketRepository;
+import com.project.taskmanagement.modal.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,13 +12,32 @@ import java.util.Optional;
 @Service
 public class TicketService {
     private final TicketRepository ticketRepository;
+    private final UserRepository userRepository;
+    private final EmailService emailService;
 
-    public TicketService(TicketRepository ticketRepository) {
+    public TicketService(TicketRepository ticketRepository,
+                         UserRepository userRepository,
+                         EmailService emailService) {
         this.ticketRepository = ticketRepository;
+        this.userRepository = userRepository;
+        this.emailService = emailService;
     }
 
     public Ticket createTicket(Ticket ticket) {
-        return ticketRepository.save(ticket);
+        Ticket savedTicket = ticketRepository.save(ticket);
+        if (savedTicket.getAssignedUserId() != null) {
+            Optional<User> assignerUser = userRepository.findById(savedTicket.getAssignedUserId());
+
+            // to send the email
+            if (assignerUser.isPresent()) {
+                emailService.sendTicketAssignedEmail(
+                        assignerUser.get().getEmail(),
+                        savedTicket.getTitle()
+                );
+            }
+        }
+
+        return savedTicket;
     }
 
     public List<Ticket> getAllTickets() {
