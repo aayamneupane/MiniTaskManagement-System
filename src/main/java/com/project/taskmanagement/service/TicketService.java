@@ -92,4 +92,8 @@ public class TicketService {
         return ticketRepository.countByPriority(priority);
     }
 
+    public void deleteAllTickets() {
+        ticketRepository.deleteAll();
+    }
+
 }

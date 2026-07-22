@@ -31,5 +31,11 @@ public class UserController {
         return userService.getAllUsers();
     }
 
+    // for my testing purposes
+    @DeleteMapping
+    public void deleteUser() {
+        userService.deleteAllUsers();
+    }
+
 
 }
