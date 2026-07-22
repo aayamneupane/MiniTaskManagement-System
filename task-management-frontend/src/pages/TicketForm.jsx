@@ -33,7 +33,7 @@ function TicketForm() {
           <label className="full">Description<textarea name="description" value={ticket.description} onChange={update} rows="5" placeholder="Explain what needs to be done..." /></label>
           <label>Priority<select name="priority" value={ticket.priority} onChange={update}><option>Low</option><option>Medium</option><option>High</option></select></label>
           <label>Status<select name="status" value={ticket.status} onChange={update}><option>Open</option><option>In Progress</option><option>Closed</option></select></label>
-          <label>Due date<input type="date" name="dueDate" value={ticket.dueDate || ''} onChange={update} /></label>
+          <label>Due date<input type="date" name="dueDate" value={ticket.dueDate || ''} onChange={update} onInput={update} /></label>
           <label>Assign to<select name="assignedUserId" value={ticket.assignedUserId} onChange={update}><option value="">Unassigned</option>{users.map((user) => <option value={user.id} key={user.id}>{user.name} ({user.email})</option>)}</select></label>
         </div>
         <div className="form-actions"><Link className="secondary-button" to="/tickets">Cancel</Link><button className="primary-button" disabled={saving}>{saving ? 'Saving...' : id ? 'Save Changes' : 'Create Ticket'}</button></div>

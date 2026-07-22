@@ -1,5 +1,6 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import AppLayout from './components/AppLayout'
+import ProtectedRoute from './components/ProtectedRoute'
 import Dashboard from './pages/Dashboard'
 import Tickets from './pages/Tickets'
 import TicketForm from './pages/TicketForm'
@@ -14,13 +15,15 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route element={<AppLayout />}>
-          <Route index element={<Navigate to="/dashboard" replace />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/tickets" element={<Tickets />} />
-          <Route path="/tickets/new" element={<TicketForm />} />
-          <Route path="/tickets/:id/edit" element={<TicketForm />} />
-          <Route path="/users" element={<Users />} />
+        <Route element={<ProtectedRoute />}>
+          <Route element={<AppLayout />}>
+            <Route index element={<Navigate to="/dashboard" replace />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/tickets" element={<Tickets />} />
+            <Route path="/tickets/new" element={<TicketForm />} />
+            <Route path="/tickets/:id/edit" element={<TicketForm />} />
+            <Route path="/users" element={<Users />} />
+          </Route>
         </Route>
         <Route path="*" element={<Navigate to="/dashboard" replace />} />
       </Routes>
