@@ -26,7 +26,7 @@ public class DashboardController {
 
         dashboardData.put("openTickets", ticketService.countTicketsByStatus("Open"));
         dashboardData.put("inProgressTickets", ticketService.countTicketsByStatus("In Progress"));
-        dashboardData.put("closedTickets", ticketService.countTicketsByStatus("Closed"));
+        dashboardData.put("completeTickets", ticketService.countTicketsByStatus("Complete"));
 
         dashboardData.put("lowPriorityTickets", ticketService.countTicketsByPriority("Low"));
         dashboardData.put("mediumPriorityTickets", ticketService.countTicketsByPriority("Medium"));

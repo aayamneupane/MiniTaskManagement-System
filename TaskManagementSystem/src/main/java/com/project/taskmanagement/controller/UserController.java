@@ -27,14 +27,8 @@ public class UserController {
     }
 
     @GetMapping
-    public List<User> getallUsers() {
-        return userService.getAllUsers();
-    }
-
-    // for my testing purposes
-    @DeleteMapping
-    public void deleteUser() {
-        userService.deleteAllUsers();
+    public List<User> getallUsers(@RequestHeader("X-User-Id") Long actorId) {
+        return userService.getAllUsers(actorId);
     }
 
 
