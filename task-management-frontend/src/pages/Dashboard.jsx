@@ -5,7 +5,7 @@ import api from '../services/api'
 
 ChartJS.register(ArcElement, BarElement, CategoryScale, LinearScale, Tooltip, Legend)
 
-const initialData = { totalTickets: 0, openTickets: 0, inProgressTickets: 0, closedTickets: 0, lowPriorityTickets: 0, mediumPriorityTickets: 0, highPriorityTickets: 0 }
+const initialData = { totalTickets: 0, openTickets: 0, inProgressTickets: 0, completeTickets: 0, lowPriorityTickets: 0, mediumPriorityTickets: 0, highPriorityTickets: 0 }
 
 function Dashboard() {
   const [data, setData] = useState(initialData)
@@ -19,9 +19,9 @@ function Dashboard() {
     { label: 'Total Tickets', value: data.totalTickets, color: 'navy' },
     { label: 'Open', value: data.openTickets, color: 'blue' },
     { label: 'In Progress', value: data.inProgressTickets, color: 'orange' },
-    { label: 'Closed', value: data.closedTickets, color: 'green' },
+    { label: 'Complete', value: data.completeTickets, color: 'green' },
   ]
-  const statusChart = { labels: ['Open', 'In Progress', 'Closed'], datasets: [{ data: [data.openTickets, data.inProgressTickets, data.closedTickets], backgroundColor: ['#3b82f6', '#f59e0b', '#22c55e'], borderWidth: 0 }] }
+  const statusChart = { labels: ['Open', 'In Progress', 'Complete'], datasets: [{ data: [data.openTickets, data.inProgressTickets, data.completeTickets], backgroundColor: ['#3b82f6', '#f59e0b', '#22c55e'], borderWidth: 0 }] }
   const priorityChart = { labels: ['Low', 'Medium', 'High'], datasets: [{ label: 'Tickets', data: [data.lowPriorityTickets, data.mediumPriorityTickets, data.highPriorityTickets], backgroundColor: ['#60a5fa', '#2563eb', '#173f8a'], borderRadius: 7 }] }
   const chartOptions = { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { usePointStyle: true, padding: 18 } } } }
 

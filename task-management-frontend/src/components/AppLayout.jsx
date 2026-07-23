@@ -1,15 +1,17 @@
 import { NavLink, Outlet, useNavigate } from 'react-router-dom'
 
-const links = [
+const mainLinks = [
   { to: '/dashboard', icon: '▦', label: 'Dashboard' },
   { to: '/tickets', icon: '✓', label: 'Tickets' },
   { to: '/tickets/new', icon: '+', label: 'Create Ticket' },
-  { to: '/users', icon: '♙', label: 'Users' },
 ]
 
 function AppLayout() {
   const navigate = useNavigate()
   const currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null')
+  const links = currentUser?.role === 'ADMIN'
+    ? [...mainLinks, { to: '/users', icon: '♙', label: 'Users' }]
+    : mainLinks
 
   function logout() {
     localStorage.removeItem('currentUser')
