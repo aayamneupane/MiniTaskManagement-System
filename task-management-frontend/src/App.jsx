@@ -4,6 +4,7 @@ import ProtectedRoute from './components/ProtectedRoute'
 import Dashboard from './pages/Dashboard'
 import Tickets from './pages/Tickets'
 import TicketForm from './pages/TicketForm'
+import TicketDetails from './pages/TicketDetails'
 import Users from './pages/Users'
 import Login from './pages/Login'
 import Register from './pages/Register'
@@ -21,6 +22,7 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/tickets" element={<Tickets />} />
             <Route path="/tickets/new" element={<TicketForm />} />
+            <Route path="/tickets/:id" element={<TicketDetails />} />
             <Route path="/tickets/:id/edit" element={<TicketForm />} />
             <Route path="/users" element={<Users />} />
           </Route>
