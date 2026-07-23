@@ -31,5 +31,12 @@ public class UserController {
         return userService.getAllUsers(actorId);
     }
 
+    @DeleteMapping("/{id}")
+    public String deleteUser(@RequestHeader("X-User-Id") Long actorId,
+                             @PathVariable Long id) {
+        userService.deleteUser(actorId, id);
+        return "User deleted successfully";
+    }
+
 
 }
