@@ -78,7 +78,9 @@ public class TicketService {
         if (ALLOWED_STATUSES.contains(updatedTicket.getStatus())) {
             existingTicket.setStatus(updatedTicket.getStatus());
         }
-        return ticketRepository.save(existingTicket);
+        Ticket savedTicket = ticketRepository.save(existingTicket);
+        sendUpdateEmail(savedTicket);
+        return savedTicket;
     }
 
     public Ticket updateTicketStatus(Long id, String status, Long actorId) {
@@ -108,16 +110,9 @@ public class TicketService {
                 : ticketRepository.findByTitleContainingIgnoreCaseAndAssignedUserId(title, actor.getId());
     }
 
-    public long countTotalTickets() {
-        return ticketRepository.count();
-    }
-    public long countTicketsByStatus(String status) {
-        return ticketRepository.countByStatus(status);
-    }
-    public long countTicketsByPriority(String priority) {
-        return ticketRepository.countByPriority(priority);
-    }
-
+    public long countTotalTickets() { return ticketRepository.count(); }
+    public long countTicketsByStatus(String status) { return ticketRepository.countByStatus(status); }
+    public long countTicketsByPriority(String priority) { return ticketRepository.countByPriority(priority); }
     private User requireUser(Long userId) {
         if (userId == null) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Login is required");
@@ -146,6 +141,17 @@ public class TicketService {
         userRepository.findById(ticket.getAssignedUserId()).ifPresent(user -> {
             try {
                 emailService.sendTicketAssignedEmail(user.getEmail(), ticket.getTitle(), ticket.getId());
+            } catch (Exception e) {
+                System.out.println("Email sending failed: " + e.getMessage());
+            }
+        });
+    }
+
+    private void sendUpdateEmail(Ticket ticket) {
+        if (ticket.getAssignedUserId() == null) return;
+        userRepository.findById(ticket.getAssignedUserId()).ifPresent(user -> {
+            try {
+                emailService.sendTicketUpdatedEmail(user.getEmail(), ticket.getTitle(), ticket.getId());
             } catch (Exception e) {
                 System.out.println("Email sending failed: " + e.getMessage());
             }
