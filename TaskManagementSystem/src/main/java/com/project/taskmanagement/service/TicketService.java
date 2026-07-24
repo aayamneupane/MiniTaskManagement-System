@@ -108,9 +108,16 @@ public class TicketService {
                 : ticketRepository.findByTitleContainingIgnoreCaseAndAssignedUserId(title, actor.getId());
     }
 
-    public long countTotalTickets() { return ticketRepository.count(); }
-    public long countTicketsByStatus(String status) { return ticketRepository.countByStatus(status); }
-    public long countTicketsByPriority(String priority) { return ticketRepository.countByPriority(priority); }
+    public long countTotalTickets() {
+        return ticketRepository.count();
+    }
+    public long countTicketsByStatus(String status) {
+        return ticketRepository.countByStatus(status);
+    }
+    public long countTicketsByPriority(String priority) {
+        return ticketRepository.countByPriority(priority);
+    }
+
     private User requireUser(Long userId) {
         if (userId == null) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Login is required");
@@ -138,7 +145,7 @@ public class TicketService {
         if (ticket.getAssignedUserId() == null) return;
         userRepository.findById(ticket.getAssignedUserId()).ifPresent(user -> {
             try {
-                emailService.sendTicketAssignedEmail(user.getEmail(), ticket.getTitle());
+                emailService.sendTicketAssignedEmail(user.getEmail(), ticket.getTitle(), ticket.getId());
             } catch (Exception e) {
                 System.out.println("Email sending failed: " + e.getMessage());
             }
